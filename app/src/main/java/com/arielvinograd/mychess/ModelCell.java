@@ -2,8 +2,19 @@ package com.arielvinograd.mychess;
 
 public class ModelCell {
 
+    //coordinates:
+    private int x, y;
 
-    Piece piece;
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    //current piece attribute:
+    private Piece piece;
     public Piece getPiece(){
         return piece;
     }
@@ -11,8 +22,15 @@ public class ModelCell {
         piece = newPiece;
     }
 
-    //Events:
+    //which board is belong to:
+    private ModelBoard board;
+    public ModelBoard getBoard(){
+        return board;
+    }
 
-    //clicked on event:
-
+    public ModelCell(ModelBoard board, int x, int y){
+        this.board = board;
+        this.x = x;
+        this.y = y;
+    }
 }
