@@ -47,4 +47,9 @@ public class ModelBoard {
         //todo
     }
 
+    public performTurnByRootStep(BasicStep basicStep)
+    {
+
+    }
+
 }

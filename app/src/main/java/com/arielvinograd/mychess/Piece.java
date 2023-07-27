@@ -13,7 +13,9 @@ public abstract class Piece {
         this.currentCell = newCell;
     }
 
-    //return false if the current cell is null
+    /**
+     * @return false if the current cell is null.
+     */
     public boolean isOnBoard() {
         return currentCell != null;
     }
@@ -29,9 +31,12 @@ public abstract class Piece {
         firstMove = value;
     }
 
-    //indicate whether the piece is unmovable for some reason. for example: there is enemy Immobilizer nearby.
+    //This methode indicate whether the piece is unmovable for some reason. for example: there is enemy Immobilizer nearby.
     boolean frozen;
 
+    /**
+     * This methode indicate whether the piece is unmovable for some reason. for example: there is enemy Immobilizer nearby.
+     */
     public boolean isFrozen() {
         return frozen;
     }

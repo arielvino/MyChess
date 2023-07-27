@@ -32,7 +32,7 @@ public class ModelCell {
     }
 
     //this methode is called when the user click on the cell:
-    public void performClick() {
+    public void notifyThatTheCellClicked() {
         board.onCellClicked(this);
     }
 
