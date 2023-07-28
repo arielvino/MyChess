@@ -42,14 +42,4 @@ public class ModelBoard {
         //todo
     }
 
-    //this methode invoked when a cell reported that it have been clicked:
-    protected void onCellClicked(ModelCell cell){
-        //todo
-    }
-
-    public performTurnByRootStep(BasicStep basicStep)
-    {
-
-    }
-
 }
