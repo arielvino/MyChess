@@ -1,4 +1,4 @@
-package com.arielvinograd.mychess;
+package com.arielvinograd.mychess.ChessModel;
 
 import java.util.ArrayList;
 
@@ -28,18 +28,14 @@ public class TurnInfo {
         return steps.size();
     }
 
+    /**
+     * Return an array that provide the list of basic steps in the turn.
+     */
     public BasicStep[] getSteps() {
-
         return (BasicStep[]) steps.toArray();
     }
 
-    /**
-     * Return the step at the specified index.
-     */
-    public BasicStep getStep(int index) {
-        return steps.get(index);
-    }
-
+    //Constructor
     public TurnInfo(TurnType title, ArrayList<BasicStep> steps) {
         this.title = title;
         this.steps = steps;

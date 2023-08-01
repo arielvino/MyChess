@@ -1,4 +1,4 @@
-package com.arielvinograd.mychess;
+package com.arielvinograd.mychess.ChessModel;
 
 /**
  * This class is a struct that represent a 2D location.

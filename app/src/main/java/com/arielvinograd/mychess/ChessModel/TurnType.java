@@ -1,4 +1,4 @@
-package com.arielvinograd.mychess;
+package com.arielvinograd.mychess.ChessModel;
 
 /**
  * This enum indicate the type of a turn.
