@@ -1,15 +1,32 @@
 package com.arielvinograd.mychess.ChessModel;
 
-public abstract class Piece {
+import com.arielvinograd.mychess.Interfaces.IChessCell;
+import com.arielvinograd.mychess.Interfaces.IChessPiece;
+import com.arielvinograd.mychess.Interfaces.PlayerColor;
 
+public abstract class Piece implements IChessPiece {
+
+    private final PlayerColor color;
     //keep the current cell that the piece is located on
-    ModelCell currentCell;
+    IChessCell currentCell;
+    //indicates whether the piece ever moved in the past:
+    boolean firstMove = true;
+    //This methode indicate whether the piece is unmovable for some reason. for example: there is enemy Immobilizer nearby.
+    boolean frozen;
 
-    public ModelCell getCurrentCell() {
+    public Piece(PlayerColor color) {
+        this.color = color;
+    }
+
+    public PlayerColor getColor() {
+        return color;
+    }
+
+    public IChessCell getCell() {
         return currentCell;
     }
 
-    protected void setCurrentCell(ModelCell newCell) {
+    public void setCell(IChessCell newCell) {
         this.currentCell = newCell;
     }
 
@@ -20,9 +37,6 @@ public abstract class Piece {
         return currentCell != null;
     }
 
-    //indicates whether the piece ever moved in the past:
-    boolean firstMove = true;
-
     public boolean isFirstMove() {
         return firstMove;
     }
@@ -31,9 +45,6 @@ public abstract class Piece {
         firstMove = value;
     }
 
-    //This methode indicate whether the piece is unmovable for some reason. for example: there is enemy Immobilizer nearby.
-    boolean frozen;
-
     /**
      * This methode indicate whether the piece is unmovable for some reason. for example: there is enemy Immobilizer nearby.
      */
@@ -41,6 +52,11 @@ public abstract class Piece {
         return frozen;
     }
 
+    /**
+     * This methode is used in order to set the Frozen value of a piece.
+     *
+     * @param frozen the new frozen value.
+     */
     public void setFrozen(boolean frozen) {
         this.frozen = frozen;
     }

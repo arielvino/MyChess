@@ -1,4 +1,4 @@
-package com.arielvinograd.mychess.ChessModel;
+package com.arielvinograd.mychess.Interfaces;
 
 public enum PlayerColor {
     Black,
