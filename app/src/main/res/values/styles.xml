@@ -1,0 +1,8 @@
+<resources>
+
+    <style name="MarginalLabelStyle">
+        <item name="android:colorBackground">?attr/MarginalLabelBackgroundColor</item>
+        <item name="android:colorForeground">?attr/MarginalLabelForegroundColor</item>
+        <item name="android:textSize">@dimen/MarginalLabelTextSize</item>
+    </style>
+</resources>

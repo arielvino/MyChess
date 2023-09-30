@@ -1,3 +1,6 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="marginal_label_thickness">20sp</dimen>
+    <dimen name="chess_cell_size">50dp</dimen>
+    <dimen name="MarginalLabelTextSize">20sp</dimen>
+    <dimen name="UI_normalMargin">10dp</dimen>
 </resources>

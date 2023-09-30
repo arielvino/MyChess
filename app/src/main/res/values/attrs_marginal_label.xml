@@ -1,0 +1,6 @@
+<resources>
+    <declare-styleable name="MarginalLabel">
+        <attr name="MarginalLabelBackgroundColor" format="color|reference" />
+        <attr name="MarginalLabelForegroundColor" format="color|reference" />
+    </declare-styleable>
+</resources>

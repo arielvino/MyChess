@@ -3,4 +3,9 @@
     <string name="local_game">Local Game</string>
     <string name="play_lan">Play over LAN</string>
     <string name="editor">Board Editor</string>
+    <string name="save">Save</string>
+
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
 </resources>

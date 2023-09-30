@@ -1,0 +1,12 @@
+Create The Board Editor
+
+Editor Activity
+Board Fragment
+add/remove columns/rows
+Wrap Layout Contain All of The available pieces
+Trash view for garbage pieces
+panel to set the King piece for each player
+board name
+Editor view model
+save/throw buttons
+Ui for editing piece's params
