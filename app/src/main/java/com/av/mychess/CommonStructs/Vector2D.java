@@ -1,5 +1,7 @@
 package com.av.mychess.CommonStructs;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * This class is a struct that represent a 2D vector. Useful for: locations, directions and more.
  */
@@ -32,5 +34,9 @@ public class Vector2D {
 
     public boolean containedInRectangular(Vector2D vector) {
         return vector.x >= 0 && vector.x < x && vector.y >= 0 && vector.y < y;
+    }
+
+    public boolean identical(@NotNull Vector2D vector2D) {
+        return x == vector2D.getX() && y == vector2D.getY();
     }
 }

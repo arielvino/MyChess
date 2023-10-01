@@ -1,4 +1,4 @@
-package com.av.mychess.ui.abstracts;
+package com.av.mychess.ui.reusable;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

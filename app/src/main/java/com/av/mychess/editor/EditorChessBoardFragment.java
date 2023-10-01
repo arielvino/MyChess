@@ -15,12 +15,15 @@ import com.av.mychess.Interfaces.EditorChessBoardViewModel;
 import com.av.mychess.Interfaces.ModelInterfaces.ICell;
 import com.av.mychess.Interfaces.ModelInterfaces.IChessBoard;
 import com.av.mychess.R;
-import com.av.mychess.ui.abstracts.AbstractChessBoardFragment;
+import com.av.mychess.ui.reusable.AbstractChessBoardFragment;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class EditorChessBoardFragment extends AbstractChessBoardFragment {
 
+    private final ArrayList<Vector2D> selectedLocations = new ArrayList<>();
     private GridLayout cellsHolder;
     private EditorChessCellView[][] cells;
     private EditorChessBoardViewModel mViewModel;
@@ -28,6 +31,10 @@ public class EditorChessBoardFragment extends AbstractChessBoardFragment {
 
     public static EditorChessBoardFragment newInstance() {
         return new EditorChessBoardFragment();
+    }
+
+    public ArrayList<Vector2D> getSelectedLocations() {
+        return selectedLocations;
     }
 
     @Override
@@ -44,7 +51,7 @@ public class EditorChessBoardFragment extends AbstractChessBoardFragment {
         mViewModel.connectToView(this);
 
         //initialize the board with default size:
-        mViewModel.initializeTable(new Vector2D(IChessBoard.DEFAULT_SIZE, IChessBoard.DEFAULT_SIZE));
+        mViewModel.initializeTable(new Vector2D(15, IChessBoard.DEFAULT_SIZE));
     }
 
     @NonNull
@@ -62,14 +69,18 @@ public class EditorChessBoardFragment extends AbstractChessBoardFragment {
     @Nullable
     @Override
     public ICell getCell(@Nullable Vector2D location) {
-        return cells[location.getX()][location.getY()];
+        if (location == null) {
+            return null;
+        } else {
+            return cells[location.getX()][location.getY()];
+        }
     }
 
     @Override
     public void drawTable(@NonNull Vector2D dimensions) {
         mDimensions = dimensions;
         cells = new EditorChessCellView[dimensions.getX()][dimensions.getY()];
-        cellsHolder.setColumnCount(mDimensions.getY());//todo: marginal labels.
+        cellsHolder.setColumnCount(mDimensions.getX());//todo: marginal labels.
         cellsHolder.setRowCount(mDimensions.getY());//todo: marginal labels.
         //add marginal labels on the top.
         for (int x = 0; x < mDimensions.getX(); x++) {
@@ -81,6 +92,31 @@ public class EditorChessBoardFragment extends AbstractChessBoardFragment {
                 params.rowSpec = GridLayout.spec(y);//todo: add marginal label.
                 cell.setLayoutParams(params);
 
+                //select / unselect on click:
+                cell.setOnClickListener(view -> {
+                    //check if already selected:
+                    boolean selected = false;
+                    for (Vector2D location : selectedLocations) {
+                        if (cell.getLocation().identical(location)) {
+                            selected = true;
+                            break;
+                        }
+                    }
+                    //clear old selected locations:
+                    for (Vector2D location : selectedLocations) {
+                        ((EditorChessCellView) getCell(location)).unSelect();
+                    }
+                    selectedLocations.clear();
+
+                    //select:
+                    if (!selected) {
+                        selectedLocations.add(cell.getLocation());
+                        cell.select();
+                    }
+                });
+
+
+                cells[x][y] = cell;
                 cellsHolder.addView(cell);
             }
             //todo: add marginal label on the end.

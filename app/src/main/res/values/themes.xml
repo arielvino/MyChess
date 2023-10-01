@@ -1,6 +1,9 @@
 <resources>
-    <style name="Theme.MyChess.Light" parent="Theme.AppCompat.NoActionBar">
+    <style name="Theme.MyChess.Night" parent="Theme.AppCompat.NoActionBar">
         <item name="MarginalLabelBackgroundColor">@color/dark_brown</item>
         <item name="MarginalLabelForegroundColor">@color/burlywood</item>
+        <item name="colorPrimary">#55FFFFFF</item>
+        <item name="colorPrimaryVariant">#22FFFFFF</item>
+        <item name="colorOnPrimary">#bbFFFFFF</item>
     </style>
 </resources>

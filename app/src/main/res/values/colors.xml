@@ -2,7 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="light_cell_color">#ffff8844</color>
+    <color name="light_cell_color">#ffffaa88</color>
     <color name="dark_cell_color">#88ff8844</color>
     <color name="dark_selected_cell_color">#eeffd700</color>
     <color name="light_selected_cell_color">#FFffd700</color>

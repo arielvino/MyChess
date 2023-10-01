@@ -14,15 +14,15 @@
         <activity
             android:name=".editor.EditorActivity"
             android:exported="false"
-            android:theme="@style/Theme.MyChess.Light" />
+            android:theme="@style/Theme.MyChess.Night" />
         <activity
             android:name=".localGame.LocalGameActivity"
             android:exported="false"
-            android:theme="@style/Theme.MyChess.Light" />
+            android:theme="@style/Theme.MyChess.Night" />
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.MyChess.Night">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

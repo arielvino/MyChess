@@ -14,7 +14,7 @@ import com.av.mychess.CommonStructs.Vector2D;
 import com.av.mychess.Interfaces.ModelInterfaces.ICell;
 import com.av.mychess.Interfaces.ModelInterfaces.IChessGame;
 import com.av.mychess.R;
-import com.av.mychess.ui.abstracts.AbstractChessBoardFragment;
+import com.av.mychess.ui.reusable.AbstractChessBoardFragment;
 
 public class GameChessBoardFragment extends AbstractChessBoardFragment {
 

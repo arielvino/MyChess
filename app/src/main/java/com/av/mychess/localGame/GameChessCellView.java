@@ -9,8 +9,7 @@ import androidx.annotation.Nullable;
 import com.av.mychess.CommonStructs.Vector2D;
 import com.av.mychess.Interfaces.ViewModelInterfaces.ITarget;
 import com.av.mychess.R;
-import com.av.mychess.localGame.GameChessBoardFragment;
-import com.av.mychess.ui.abstracts.AbstractChessCellView;
+import com.av.mychess.ui.reusable.AbstractChessCellView;
 
 /**
  * TODO: document your custom view class.

@@ -1,18 +1,17 @@
-package com.av.mychess.ui.abstracts;
+package com.av.mychess.ui.reusable;
 
 import android.content.Context;
 import android.widget.GridLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 
-import com.av.mychess.CommonStructs.PlayerColor;
 import com.av.mychess.CommonStructs.Vector2D;
 import com.av.mychess.Interfaces.ModelInterfaces.IBoard;
 import com.av.mychess.Interfaces.ModelInterfaces.ICell;
 import com.av.mychess.Interfaces.ModelInterfaces.IChessPiece;
 import com.av.mychess.R;
+import com.av.mychess.chessModel.pieces.PiecesFactory;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -30,6 +29,8 @@ public abstract class AbstractChessCellView extends androidx.appcompat.widget.Ap
         params.height = (int) getResources().getDimension(R.dimen.chess_cell_size);
         params.width = (int) getResources().getDimension(R.dimen.chess_cell_size);
         setLayoutParams(params);
+        setScaleType(ScaleType.FIT_XY);
+        setPadding(5, 5, 5, 5);
         resetDefaultColor();
     }
 
@@ -57,13 +58,12 @@ public abstract class AbstractChessCellView extends androidx.appcompat.widget.Ap
     public void setPiece(@Nullable IChessPiece piece) {
         this.piece = piece;
         if (piece != null) {
-            String colorChar = piece.getColor() == PlayerColor.White ? "w" : "b";
-            String resName = colorChar + piece.getName().toLowerCase() + ".png";
+            String resName = PiecesFactory.getImageName(piece.getClass(), piece.getColor());
 
             int resId = getResources().getIdentifier(resName, "drawable", getContext().getPackageName());
-            setBackground(ResourcesCompat.getDrawable(getResources(), resId, getContext().getTheme()));
+            setImageResource(resId);
         } else {
-            setBackground(null);
+            setImageResource(0);
         }
         //todo
     }
