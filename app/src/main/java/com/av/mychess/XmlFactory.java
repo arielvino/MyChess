@@ -17,8 +17,9 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 public class XmlFactory {
-    public static final String GAME="game", BOARD="board", X="x", Y="y", PIECE="piece", NAME="name", COLOR="color", BLACK="black", WHITE="white";
-    public Document loadXmlFromPath(String path) {
+    public static final String BOARD_FILE_EXTENSION = ".board", GAME = "game", BOARD = "board", X = "x", Y = "y", PIECE = "piece", NAME = "name", COLOR = "color", BLACK = "black", WHITE = "white";
+
+    public static Document loadXmlFromPath(String path) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -33,7 +34,7 @@ public class XmlFactory {
         return null; // Return null in case of an error
     }
 
-    public void writeXmlToFile(Document xmlDoc, String filePath) {
+    public static void writeXmlToFile(Document xmlDoc, String filePath) {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -59,5 +60,10 @@ public class XmlFactory {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public static Document getChessBoardAsXml() {
+        //todo
+        return null;
     }
 }

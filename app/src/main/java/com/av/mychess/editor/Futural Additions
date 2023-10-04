@@ -1,0 +1,5 @@
+Add marginal labels for numbers and letters around the board.
+Make the board holder supportive of diagonal scrolling (maybe making a new fragment for a board container).
+Allow addition and removal of rows and columns (addRowAfter(3), addColAfter("D"), deleteRow(2) etc.
+Allow  slide movement on the board to select multiple cells at once.
+Allow zoom in/out in boardView.

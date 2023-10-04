@@ -4,7 +4,7 @@
     <string name="play_lan">Play over LAN</string>
     <string name="editor">Board Editor</string>
     <string name="save">Save</string>
-
-    <string name="pieces_box_tag">PIECES_BOX</string>
+    <string name="boardName_label">Board Name:</string>
+    <string name="boardName_hint">Enter board name…</string>
 
 </resources>

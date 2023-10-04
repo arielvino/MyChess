@@ -1,92 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimaryVariant">
 
-    <ScrollView
-
-        android:id="@+id/scrollView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/changeColor_button"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
-        <HorizontalScrollView
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/nameBoard_input"
+            android:name="com.av.mychess.ui.reusable.InputFieldWithMessageBoxFragment"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/board_fragment"
-                android:name="com.av.mychess.editor.EditorChessBoardFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </HorizontalScrollView>
-    </ScrollView>
-
-    <ImageButton
-        android:id="@+id/changeColor_button"
-        android:layout_width="@dimen/chess_cell_size"
-        android:layout_height="@dimen/chess_cell_size"
-        android:layout_margin="@dimen/UI_normalMargin"
-        android:background="?attr/colorPrimary"
-        android:padding="5dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/b_pawn"
-        app:layout_constraintBottom_toTopOf="@+id/pieces_box"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
-
-    <ImageButton
-        android:id="@+id/trash_button"
-        android:layout_width="@dimen/chess_cell_size"
-        android:layout_height="@dimen/chess_cell_size"
-        android:layout_margin="@dimen/UI_normalMargin"
-        android:background="?attr/colorPrimary"
-        android:padding="5dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toTopOf="@+id/pieces_box"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/changeColor_button"
-        tools:src="@android:drawable/ic_menu_delete" />
+            android:layout_height="wrap_content"
+            android:layoutDirection="ltr"
+            app:layout_constraintBottom_toTopOf="@id/scrollView"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/pieces_box"
-        android:name="com.av.mychess.ui.reusable.PiecesBoxFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:tag="@string/pieces_box_tag"
-        app:flow_firstHorizontalBias="0.5"
-        app:layout_constraintBottom_toTopOf="@id/properties_view_fragment"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/trash_button" />
+        <ScrollView
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/properties_view_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/saveBoard_button"
-        app:layout_constraintTop_toBottomOf="@+id/pieces_box" />
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/changeColor_button"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintTop_toBottomOf="@id/nameBoard_input">
 
-    <Button
-        android:id="@+id/saveBoard_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/UI_normalMargin"
-        android:background="?attr/colorPrimary"
-        android:text="@string/save"
-        android:textColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/properties_view_fragment" />
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/board_fragment"
+                    android:name="com.av.mychess.editor.EditorChessBoardFragment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </HorizontalScrollView>
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/changeColor_button"
+            android:layout_width="@dimen/chess_cell_size"
+            android:layout_height="@dimen/chess_cell_size"
+            android:layout_margin="@dimen/UI_normalMargin"
+            android:background="?attr/colorPrimary"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/b_pawn"
+            app:layout_constraintBottom_toTopOf="@+id/pieces_box"
+            app:layout_constraintLeft_toRightOf="@id/trash_button"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+
+        <ImageButton
+            android:id="@+id/trash_button"
+            android:layout_width="@dimen/chess_cell_size"
+            android:layout_height="@dimen/chess_cell_size"
+            android:layout_margin="@dimen/UI_normalMargin"
+            android:background="?attr/colorPrimary"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@+id/pieces_box"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/changeColor_button"
+            app:layout_constraintTop_toBottomOf="@+id/scrollView"
+            tools:src="@android:drawable/ic_menu_delete"
+            app:layout_constraintHorizontal_chainStyle="packed"/>
+
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/pieces_box"
+            android:name="com.av.mychess.ui.reusable.PiecesBoxFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:flow_firstHorizontalBias="0.5"
+            app:layout_constraintBottom_toTopOf="@id/properties_view_fragment"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/trash_button" />
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/properties_view_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/saveBoard_button"
+            app:layout_constraintTop_toBottomOf="@+id/pieces_box" />
+
+        <Button
+            android:id="@+id/saveBoard_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/UI_normalMargin"
+            android:background="?attr/colorPrimary"
+            android:text="@string/save"
+            android:textColor="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/properties_view_fragment" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

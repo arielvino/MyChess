@@ -27,4 +27,5 @@
     <color name="dark_khaki">#BDB76B</color>
     <color name="forest_green">#228B22</color>
     <color name="green">#008000</color>
+    <color name="red">#FF0000</color>
 </resources>

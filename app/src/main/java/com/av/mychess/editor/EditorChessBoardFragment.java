@@ -139,4 +139,8 @@ public class EditorChessBoardFragment extends AbstractChessBoardFragment {
             }
         }
     }
+
+    public EditorChessBoardViewModel getViewModel(){
+        return mViewModel;
+    }
 }

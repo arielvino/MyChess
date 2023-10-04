@@ -1,7 +1,10 @@
 package com.av.mychess.editor;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,17 +14,20 @@ import com.av.mychess.CommonStructs.PlayerColor;
 import com.av.mychess.CommonStructs.Vector2D;
 import com.av.mychess.Interfaces.ModelInterfaces.IChessPiece;
 import com.av.mychess.R;
+import com.av.mychess.ui.reusable.InputFieldWithMessageBoxFragment;
 import com.av.mychess.ui.reusable.PiecesBoxFragment;
 
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 public class EditorActivity extends AppCompatActivity implements PiecesBoxFragment.IResultPieceTypeReceiver {
-    private ImageButton changeColorButton, deleteButton;
+    private ImageButton changeColorButton;
     private PiecesBoxFragment piecesBoxFragment;
     private EditorChessBoardFragment chessBoardFragment;
+    private InputFieldWithMessageBoxFragment boardNameFragment;
     private PlayerColor mColor = PlayerColor.White;
 
     @Override
@@ -33,6 +39,7 @@ public class EditorActivity extends AppCompatActivity implements PiecesBoxFragme
         FragmentManager fragmentManager = getSupportFragmentManager();
         piecesBoxFragment = (PiecesBoxFragment) fragmentManager.findFragmentById(R.id.pieces_box);
         chessBoardFragment = (EditorChessBoardFragment) fragmentManager.findFragmentById(R.id.board_fragment);
+        boardNameFragment = (InputFieldWithMessageBoxFragment) fragmentManager.findFragmentById(R.id.nameBoard_input);
         piecesBoxFragment.setPieceSelectedListener(this);
 
         //changeColor button:
@@ -50,14 +57,44 @@ public class EditorActivity extends AppCompatActivity implements PiecesBoxFragme
         });
 
         //delete button:
-        deleteButton = findViewById(R.id.trash_button);
+        ImageButton deleteButton = findViewById(R.id.trash_button);
         deleteButton.setImageResource(android.R.drawable.ic_menu_delete);
         deleteButton.setOnClickListener(v -> {
             for (Vector2D location : chessBoardFragment.getSelectedLocations()) {
                 EditorChessCellView cellView = (EditorChessCellView) chessBoardFragment.getCell(location);
+
+                assert cellView != null;
                 cellView.setPiece(null);
             }
         });
+
+        //save button:
+        Button saveButton = findViewById(R.id.saveBoard_button);
+        saveButton.setOnClickListener(v -> {
+            boardNameFragment.setMessage("");
+            String boardName = boardNameFragment.getInputString();
+            assert boardName != null;
+            if (boardName.contentEquals("")) {
+                boardNameFragment.setMessage(getString(R.string.boardName_hint), getColor(R.color.red));
+            } else {
+                //todo: implement saving.
+                Toast.makeText(this, "Board created successfully.", Toast.LENGTH_SHORT).show();
+                this.finish();
+            }
+        });
+
+        //Notice: the initialization continue on onPostCreate() method.
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        //board name input:
+        if (boardNameFragment.getView() != null) {
+            boardNameFragment.setDescription(getString(R.string.boardName_label));
+            boardNameFragment.setInputHint(getString(R.string.boardName_hint));
+        }
     }
 
     public PlayerColor getColor() {
@@ -66,21 +103,34 @@ public class EditorActivity extends AppCompatActivity implements PiecesBoxFragme
 
     @Override
     public void onPieceSelected(@NonNull Class<IChessPiece> piece) {
-        //todo: save to viewmodel.
         for (Vector2D location : chessBoardFragment.getSelectedLocations()) {
             try {
                 Constructor<IChessPiece> constructor = piece.getDeclaredConstructor(PlayerColor.class);
 
                 // Create a new instance using the constructor
                 IChessPiece instance = (IChessPiece) constructor.newInstance(mColor);
-                ((EditorChessCellView) chessBoardFragment.getCell(location)).setPiece(instance);
+                Objects.requireNonNull(chessBoardFragment.getViewModel().getCell(location)).setPiece(instance);//viewModel
+                ((EditorChessCellView) Objects.requireNonNull(chessBoardFragment.getCell(location))).setPiece(instance);//view
 
-                // Now you have a new instance of MyClass
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
                      InvocationTargetException e) {
                 e.printStackTrace();
             }
 
         }
+    }
+
+    //prevent accidentally leaving:
+    @Override
+    public void onBackPressed() {
+        // Show a confirmation dialog
+        new AlertDialog.Builder(this)
+                .setMessage("Are you sure you want to leave?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // If the user confirms, finish the activity
+                    finish();
+                })
+                .setNegativeButton("No", null) // Do nothing if the user cancels
+                .show();
     }
 }
