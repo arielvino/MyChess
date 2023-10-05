@@ -14,11 +14,15 @@ import com.av.mychess.CommonStructs.PlayerColor;
 import com.av.mychess.CommonStructs.Vector2D;
 import com.av.mychess.Interfaces.ModelInterfaces.IChessPiece;
 import com.av.mychess.R;
+import com.av.mychess.XmlFactory;
 import com.av.mychess.ui.reusable.InputFieldWithMessageBoxFragment;
 import com.av.mychess.ui.reusable.PiecesBoxFragment;
 
 import org.jetbrains.annotations.Nullable;
+import org.w3c.dom.Document;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Objects;
@@ -76,15 +80,45 @@ public class EditorActivity extends AppCompatActivity implements PiecesBoxFragme
             assert boardName != null;
             if (boardName.contentEquals("")) {
                 boardNameFragment.setMessage(getString(R.string.boardName_hint), getColor(R.color.red));
+                Toast.makeText(this, getString(R.string.boardName_hint), Toast.LENGTH_SHORT).show();
             } else {
-                //todo: implement saving.
-                Toast.makeText(this, "Board created successfully.", Toast.LENGTH_SHORT).show();
-                this.finish();
+                try {
+                    Document xml = chessBoardFragment.getViewModel().exportAsXml();
+
+                    //internal storage:
+                    String path = getFilesDir().getAbsolutePath();
+
+                    //create boards directory
+                    path += "/" + XmlFactory.BOARDS_DIRECTORY;
+                    File dir = new File(path);
+                    if (!dir.exists()) {
+                        if (!dir.mkdir()) {
+                            throw new IOException("Can not create board directory.");
+                        }
+                    }
+
+                    //create board file:
+                    path += "/" + boardName + XmlFactory.BOARD_FILE_EXTENSION;
+                    File boardFile = new File(path);
+                    if(boardFile.exists()){
+                        boardNameFragment.setMessage("Choose different name or location.", getColor(R.color.red));
+                        throw new IOException("Board with the same name already exists.");
+                    }
+                    else {
+                        XmlFactory.writeXmlToFile(xml, path);
+                    }
+
+                    Toast.makeText(this, "Board created successfully.", Toast.LENGTH_SHORT).show();
+                    this.finish();
+                } catch (IOException ex) {
+                    Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
         //Notice: the initialization continue on onPostCreate() method.
     }
+
 
     @Override
     protected void onPostCreate(@Nullable Bundle savedInstanceState) {

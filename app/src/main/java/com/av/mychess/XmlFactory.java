@@ -17,7 +17,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 public class XmlFactory {
-    public static final String BOARD_FILE_EXTENSION = ".board", GAME = "game", BOARD = "board", X = "x", Y = "y", PIECE = "piece", NAME = "name", COLOR = "color", BLACK = "black", WHITE = "white";
+    public static final String BOARD_FILE_EXTENSION = ".board", BOARDS_DIRECTORY = "boards", VERSION = "version", PIECES = "pieces", GAME = "game", BOARD = "board", X = "x", Y = "y", PIECE = "piece", NAME = "name", COLOR = "color", BLACK = "black", WHITE = "white";
 
     public static Document loadXmlFromPath(String path) {
         try {

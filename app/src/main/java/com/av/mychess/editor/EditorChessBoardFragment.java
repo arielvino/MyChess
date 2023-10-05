@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.av.mychess.CommonStructs.Vector2D;
-import com.av.mychess.Interfaces.EditorChessBoardViewModel;
 import com.av.mychess.Interfaces.ModelInterfaces.ICell;
 import com.av.mychess.Interfaces.ModelInterfaces.IChessBoard;
 import com.av.mychess.R;

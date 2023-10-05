@@ -1,6 +1,7 @@
 package com.av.mychess.ui.reusable;
 
 import android.os.Bundle;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,5 +94,12 @@ public class InputFieldWithMessageBoxFragment extends Fragment {
 
     public void setInputHint(@NotNull String hint){
         inputBox.setHint(hint);
+    }
+
+    public void addOnInputStringChangedListener(@NotNull TextWatcher textWatcher){
+        inputBox.addTextChangedListener(textWatcher);
+    }
+    public void removeInputStringTextChangedListener(@NotNull TextWatcher textWatcher){
+        inputBox.removeTextChangedListener(textWatcher);
     }
 }
